@@ -1,15 +1,14 @@
-const express = require("express");
-const { route } = require(".");
+const express = require('express');
 const router = express.Router();
-const { Post, User } = require("../models");
+const { Post, User } = require('../models');
 
 /* GET users listing. */
-router.get("/", function (req, res, next) {
-  res.send("posts main");
+router.get('/', function (req, res, next) {
+  res.send('posts main');
 });
 
 // READ POST //
-router.get("/post/:id", async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   const id = parseInt(req.params.id);
   try {
     const post = await Post.findOne({ where: { id: id } });
@@ -23,7 +22,7 @@ router.get("/post/:id", async (req, res, next) => {
 
 //async 안에서만 await을 사용할 수 있다.
 //async 함수가 리턴하는 값은 프로미스다
-router.post("/post", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   const { content } = req.body; // 1) client에서 content를 받아오고
   try {
     const data = await Post.create({
@@ -38,7 +37,7 @@ router.post("/post", async (req, res, next) => {
 
 // UPDATE POST //
 
-router.put("/edit/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   const id = parseInt(req.params.id);
   const { content } = req.body;
   try {
@@ -56,7 +55,7 @@ router.put("/edit/:id", async (req, res, next) => {
 
 // DELETE POST //
 
-router.delete("/post/:id", async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   const id = parseInt(req.params.id);
   try {
     const done = await Post.destroy({
